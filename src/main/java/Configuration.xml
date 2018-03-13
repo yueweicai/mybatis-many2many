@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Rule" type="com.orilore.model.Rule"/>
+		<typeAlias alias="RuleNode" type="com.orilore.model.RuleNode"/>
+		<typeAlias alias="Node" type="com.orilore.model.Node"/>
+	</typeAliases>
+	<environments default="development">
+    		<environment id="development">
+    			<transactionManager type="JDBC"/>
+    			<dataSource type="POOLED">
+    				<property name="driver" value="com.mysql.jdbc.Driver"/>
+    				<property name="url" value="jdbc:mysql://localhost:3306/test"/>
+    				<property name="username" value="root"/>
+				<property name="password" value="orilore"/>
+    			</dataSource>
+    		</environment>
+    	</environments>
+	<mappers>
+		<mapper resource="com/orilore/model/Rule.xml"/>
+		<mapper resource="com/orilore/model/Node.xml"/>
+	</mappers>
+</configuration>

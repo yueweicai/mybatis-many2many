@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.NodeMapper">
+	<resultMap type="Node" id="nodeResultMap">
+			<id column="nid" property="id"/>
+			<result column="nname" property="nname"/>
+			<result column="pid" property="pid"/>
+			<result column="url" property="url"/>
+	</resultMap>
+	<resultMap type="Node" id="nodeMap" extends="nodeResultMap">	
+		<collection property="rules" ofType="Rule">
+			<id column="rid" property="id"/>
+			<result column="rname" property="rname"/>
+		</collection>
+	</resultMap>
+	
+	<select id="select" resultMap="nodeResultMap">
+		select * from node
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultMap="nodeMap">
+		select a.id rid,a.rname,c.id nid,c.nname,c.pid,c.url
+		from rule a left join rulenode b on a.id=b.rid
+		left join node c on b.nid=c.id
+		where c.id=#{0}
+	</select>
+</mapper>
